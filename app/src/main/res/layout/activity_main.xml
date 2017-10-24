@@ -11,5 +11,31 @@
 
       />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <com.aquila.custom.widget.GroupImageTopTextBottomLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:app_image_height="30dp"
+            app:app_image_width="30dp"
+            app:app_image_src="@mipmap/ic_camera"
+            app:app_scale_type="CENTER_INSIDE"
+
+            app:app_text="这个是测试"
+            app:app_text_size="15sp"
+
+
+            ></com.aquila.custom.widget.GroupImageTopTextBottomLayout>
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>
