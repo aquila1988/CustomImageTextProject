@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
 
 
 
@@ -25,7 +27,7 @@
             app:app_image_src="@mipmap/ic_camera"
             app:app_scale_type="FIT_XY"
             app:app_text_size="12sp"
-            app:app_parent_orientation="1"
+            app:app_parent_orientation="vertical"
             app:app_text="这个是测试的的问题系"
             app:app_text_margin_image_size="11dp"
             ></com.aquila.custom.widget.GroupImageTextLayout>
