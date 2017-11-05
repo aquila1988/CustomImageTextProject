@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/dimen_size_15"
+    android:paddingRight="@dimen/text_size_15">
+
+    <TextView
+        android:id="@+id/slide_switch_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这里是文本"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="#333"
+
+        />
+
+    <com.aquila.custom.widget.view.SlideSwitch
+        android:id="@+id/slide_switch"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+
+        app:theme_color="@color/red"
+        app:isOpen = "true"
+        app:shape = "circle"/>
+
+</RelativeLayout>

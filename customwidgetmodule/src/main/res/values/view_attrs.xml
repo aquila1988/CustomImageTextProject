@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SlideSwitch">
+        <attr name="theme_color" format="color|reference" />
+        <attr name="isOpen" format="boolean" />
+        <attr name="shape">
+            <enum name="rect" value="1" />
+            <enum name="circle" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="TriangleTextView">
+        <attr name="triangle_bg_color" format="color|reference"></attr>
+        <attr name="rate" format="float"></attr>
+
+    </declare-styleable>
+
+</resources>

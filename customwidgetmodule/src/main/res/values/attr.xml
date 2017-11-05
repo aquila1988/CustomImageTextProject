@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="app_text_size" format="dimension|reference"></attr>
+    <attr name="app_text_color" format="color|reference"></attr>
+    <attr name="app_text" format="string|reference"/>
+
+
+    <declare-styleable name="GroupSlideSwitchLayout">
+        <attr name="app_text"></attr>
+        <attr name="app_is_selected" format="boolean"></attr>
+        <attr name="app_switch_width" format="dimension|reference"></attr>
+        <attr name="app_switch_height" format="dimension|reference"></attr>
+        <attr name="app_text_color"/>
+        <attr name="app_text_size"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="GroupSingleChoiceItemLayout">
+        <attr name="app_text"></attr>
+        <attr name="app_is_show_right_image" format="boolean|reference"></attr>
+
+        <attr name="app_text_color"/>
+        <attr name="app_text_size"/>
+    </declare-styleable>
+
 
     <declare-styleable name="GroupImageTextLayout">
-
         <attr name="app_image_src" format="reference"/>
         <attr name="app_image_width" format="dimension"/>
         <attr name="app_image_height" format="dimension"/>
@@ -17,9 +39,9 @@
             <enum name="CENTER_INSIDE" value="7"/>
         </attr>
 
-        <attr name="app_text_size" format="dimension|reference"/>
-        <attr name="app_text" format="string|reference"/>
-        <attr name="app_text_color" format="color|reference"/>
+        <attr name="app_text_size"/>
+        <attr name="app_text"/>
+        <attr name="app_text_color"/>
         <attr name="app_text_gravity" format="enum">
             <enum name="center_horizontal" value="0"/>
             <enum name="left" value="1"/>
