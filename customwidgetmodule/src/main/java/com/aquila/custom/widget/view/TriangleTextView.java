@@ -45,7 +45,7 @@ public class TriangleTextView extends android.support.v7.widget.AppCompatTextVie
     protected void onDraw(Canvas canvas) {
 
         path.moveTo(0, 0);// 此点为多边形的起点
-        path.lineTo((float) -(getWidth() * (1 - rate)), 0);
+        path.lineTo((float) (getWidth() * (1 - rate)), 0);
         path.lineTo(getWidth(), (float) (getHeight() * rate));
         path.lineTo(getWidth(), (float) getHeight());
         path.close(); // 使这些点构成封闭的多边形

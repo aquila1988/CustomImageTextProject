@@ -11,11 +11,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         CLog.debug();
         CLog.v();
         CLog.d();
         CLog.i();
         CLog.e();
         CLog.w();
+
     }
 }

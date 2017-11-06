@@ -1,8 +1,10 @@
 apply plugin: 'com.android.library'
+def config = rootProject.ext.android
+
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 14
@@ -21,7 +23,9 @@ android {
     }
 }
 
+def libs = rootProject.ext.dependencies
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile libs["RecyclerView"]
+    compile libs["support_v7"]
 }
