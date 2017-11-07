@@ -1,1 +1,1 @@
-include ':app', ':customwidgetmodule'
+include ':app', ':customwidgetmodule', ':commutilmodule'

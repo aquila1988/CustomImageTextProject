@@ -1,4 +1,4 @@
-package com.aquila.customWidget.log;
+package com.aquila.commutil;
 
 
 import android.text.TextUtils;

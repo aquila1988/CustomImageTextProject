@@ -1,17 +1,24 @@
 package com.aquila.customWidget;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-import com.aquila.customWidget.log.CLog;
+import com.aquila.commutil.CLog;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity  implements OnClickListener{
+
+    Button clickButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        clickButton = (Button) findViewById(R.id.click_button);
+        clickButton.setOnClickListener(this);
 
         CLog.debug();
         CLog.v();
@@ -20,5 +27,13 @@ public class MainActivity extends AppCompatActivity {
         CLog.e();
         CLog.w();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == clickButton){
+            Intent intent = new Intent(this, SecondActivity.class);
+            startActivity(intent);
+        }
     }
 }

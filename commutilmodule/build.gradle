@@ -1,17 +1,18 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 def config = rootProject.ext.android
 
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
-    
+
     defaultConfig {
-        applicationId "com.aquila.customWidget"
         minSdkVersion 14
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -21,10 +22,10 @@ android {
     }
 }
 
+
+def libs = rootProject.ext.dependencies
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile project(':customwidgetmodule')
-    compile project(':commutilmodule')
+    compile libs["RecyclerView"]
+    compile libs["support_v7"]
 }

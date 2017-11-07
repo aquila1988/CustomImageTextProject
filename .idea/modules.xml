@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CustomImageTextProject.iml" filepath="$PROJECT_DIR$/CustomImageTextProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commutilmodule/commutilmodule.iml" filepath="$PROJECT_DIR$/commutilmodule/commutilmodule.iml" />
       <module fileurl="file://$PROJECT_DIR$/customwidgetmodule/customwidgetmodule.iml" filepath="$PROJECT_DIR$/customwidgetmodule/customwidgetmodule.iml" />
     </modules>
   </component>
