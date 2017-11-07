@@ -4,7 +4,7 @@ def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
     buildToolsVersion config.buildToolsVersion
-    
+
     defaultConfig {
         applicationId "com.aquila.customWidget"
         minSdkVersion 14

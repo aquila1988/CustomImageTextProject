@@ -5,6 +5,13 @@
     <attr name="app_text" format="string|reference"/>
 
 
+    <declare-styleable name="CustomViewPager">
+        <attr name="app_layout_orientation" format="enum">
+            <enum name="horizontal" value="0"></enum>
+            <enum name="vertical" value="1"></enum>
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="GroupSlideSwitchLayout">
         <attr name="app_text"></attr>
         <attr name="app_is_selected" format="boolean"></attr>

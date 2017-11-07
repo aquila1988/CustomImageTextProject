@@ -5,12 +5,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.aquila.custom.widget.view.VerticalViewPager;
+import com.aquila.custom.widget.view.CustomViewPager;
 
 /**
  * Created by yulong_wang on 2017/11/7 11:06.
@@ -18,8 +17,8 @@ import com.aquila.custom.widget.view.VerticalViewPager;
 
 public class SecondActivity extends Activity {
 
-    VerticalViewPager verticalViewPager ;
-    ViewPager viewPager ;
+    CustomViewPager verticalViewPager ;
+//    ViewPager viewPager ;
     SecondPagerAdapter secondPagerAdapter;
 
     SecondPagerAdapter pagerAdapter;
@@ -29,14 +28,14 @@ public class SecondActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_layout);
         verticalViewPager = findViewById(R.id.second_vertical_ViewPager);
-        viewPager = findViewById(R.id.second_normal_ViewPager);
 
         secondPagerAdapter = new SecondPagerAdapter();
         verticalViewPager.setAdapter(secondPagerAdapter);
 
-        pagerAdapter = new SecondPagerAdapter();
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setCurrentItem(2);
+//        viewPager = findViewById(R.id.second_normal_ViewPager);
+//        pagerAdapter = new SecondPagerAdapter();
+//        viewPager.setAdapter(pagerAdapter);
+//        viewPager.setCurrentItem(2);
 
     }
 
@@ -64,7 +63,7 @@ public class SecondActivity extends Activity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.activity_main, null);
+            LinearLayout linearLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.linear_layout_view_only, null);
             container.addView(linearLayout);
             linearLayout.setBackgroundColor(color[position % color.length]);
             return linearLayout;
