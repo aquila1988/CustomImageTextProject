@@ -35,6 +35,9 @@
         <attr name="app_image_src" format="reference"/>
         <attr name="app_image_width" format="dimension"/>
         <attr name="app_image_height" format="dimension"/>
+        <attr name="app_image_background" format="color|reference" />
+        <attr name="app_text_background" format="color|reference"/>
+
         <attr name="app_scale_type" format="enum">
             <enum name="MATRIX" value="0"/>
             <enum name="FIT_XY" value="1"/>
@@ -59,8 +62,11 @@
 
         <attr name="app_text_margin_image_size" format="dimension|reference"/>
         <attr name="app_parent_orientation" format="enum">
-            <enum name="vertical" value="0"/>
-            <enum name="horizontal" value="1"/>
+            <enum name="IMAGE_LEFT_TEXT_RIGHT" value="0" />
+            <enum name="IMAGE_TOP_TEXT_BOTTOM" value="1" />
+            <enum name="IMAGE_RIGHT_TEXT_LEFT" value="2" />
+            <enum name="IMAGE_BOTTOM_TEXT_TOP" value="3" />
+
         </attr>
 
         <attr name="app_padding" format="dimension"/>
