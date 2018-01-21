@@ -68,19 +68,6 @@
             <enum name="IMAGE_BOTTOM_TEXT_TOP" value="3" />
 
         </attr>
-
-        <attr name="app_padding" format="dimension"/>
-        <attr name="app_padding_left" format="dimension"/>
-        <attr name="app_padding_right" format="dimension"/>
-        <attr name="app_padding_top" format="dimension"/>
-        <attr name="app_padding_bottom" format="dimension"/>
-
-
     </declare-styleable>
-
-
-
-
-
 
 </resources>

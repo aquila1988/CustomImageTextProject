@@ -5,6 +5,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
 import android.text.SpannableString;
 import android.util.AttributeSet;
@@ -15,7 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
- * Created by yulong_wang on 2017/10/24 15:07.
+ * Created by @author 王玉龙 on 2017/10/24 15:07.
  */
 public class GroupImageTextLayout extends RelativeLayout {
     private static final ImageView.ScaleType[] SCALE_TYPE_ARRAY = {
@@ -45,8 +46,8 @@ public class GroupImageTextLayout extends RelativeLayout {
     public static final int IMAGE_RIGHT_TEXT_LEFT= 2;
     public static final int IMAGE_BOTTOM_TEXT_TOP= 3;
 
-//    @IntDef({IMAGE_LEFT_TEXT_RIGHT, IMAGE_TOP_TEXT_BOTTOM, IMAGE_RIGHT_TEXT_LEFT, IMAGE_BOTTOM_TEXT_TOP})
-//    public @interface layoutType{}
+    @IntDef({IMAGE_LEFT_TEXT_RIGHT, IMAGE_TOP_TEXT_BOTTOM, IMAGE_RIGHT_TEXT_LEFT, IMAGE_BOTTOM_TEXT_TOP})
+    public @interface OrientationType{}
 
 
     private int imageWidth;
@@ -63,12 +64,11 @@ public class GroupImageTextLayout extends RelativeLayout {
 
     private int textMarginImageSize;
 
-    private int orientationType = IMAGE_TOP_TEXT_BOTTOM;
+    private @OrientationType int orientationType = IMAGE_TOP_TEXT_BOTTOM;
 
     private ImageView imageView;
     private TextView textView;
 
-    private int paddingLeft, paddingRight, paddingTop, paddingBottom;
 
 
     public GroupImageTextLayout(Context context, AttributeSet attrs) {
@@ -93,27 +93,16 @@ public class GroupImageTextLayout extends RelativeLayout {
         gravityIndex = a.getInt(R.styleable.GroupImageTextLayout_app_text_gravity, 0);
 
 
-        paddingLeft = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_padding_left, 0);
-        paddingRight = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_padding_right, 0);
-        paddingBottom = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_padding_bottom, 0);
-        paddingTop = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_padding_top, 0);
 
-        int padding = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_padding, 0);
-        if (padding > 0) {
-            paddingTop = paddingBottom = paddingLeft = paddingRight = padding;
-        }
         orientationType = a.getInt(R.styleable.GroupImageTextLayout_app_parent_orientation, IMAGE_TOP_TEXT_BOTTOM);
         textMarginImageSize = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_text_margin_image_size, 0);
         a.recycle();
     }
 
-
     private void initializeView(Context context) {
         inflate(context, R.layout.group_image_text_layout, this);
-        imageView = (ImageView) findViewById(R.id.group_top_ImageView);
-        textView = (TextView) findViewById(R.id.group_bottom_TextView);
-
-        setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        imageView =   (ImageView) findViewById(R.id.group_image_ImageView);
+        textView = (TextView) findViewById(R.id.group_text_TextView);
 
         if (imageDrawable != null) {
             imageView.setImageDrawable(imageDrawable);
@@ -167,7 +156,7 @@ public class GroupImageTextLayout extends RelativeLayout {
 
         switch (orientationType){
             case IMAGE_LEFT_TEXT_RIGHT:
-                textParams.addRule(RelativeLayout.RIGHT_OF, R.id.group_top_ImageView);
+                textParams.addRule(RelativeLayout.RIGHT_OF, R.id.group_image_ImageView);
                 textParams.addRule(RelativeLayout.CENTER_VERTICAL);
 
                 imageParams.addRule(RelativeLayout.CENTER_VERTICAL);
@@ -176,15 +165,17 @@ public class GroupImageTextLayout extends RelativeLayout {
                 imageParams.rightMargin = textMarginImageSize / 2;
                 break;
             case IMAGE_RIGHT_TEXT_LEFT:
-                textParams.addRule(RelativeLayout.LEFT_OF, R.id.group_top_ImageView);
+
                 textParams.addRule(RelativeLayout.CENTER_VERTICAL);
+
+                imageParams.addRule(RelativeLayout.RIGHT_OF, R.id.group_text_TextView);
                 imageParams.addRule(RelativeLayout.CENTER_VERTICAL);
 
                 textParams.rightMargin = textMarginImageSize / 2;
                 imageParams.leftMargin = textMarginImageSize / 2;
                 break;
             case IMAGE_TOP_TEXT_BOTTOM:
-                textParams.addRule(RelativeLayout.BELOW, R.id.group_top_ImageView);
+                textParams.addRule(RelativeLayout.BELOW, R.id.group_image_ImageView);
                 textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
                 imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
@@ -192,8 +183,8 @@ public class GroupImageTextLayout extends RelativeLayout {
                 imageParams.bottomMargin = textMarginImageSize / 2;
                 break;
             case IMAGE_BOTTOM_TEXT_TOP:
-                textParams.addRule(RelativeLayout.ABOVE, R.id.group_top_ImageView);
                 textParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                imageParams.addRule(RelativeLayout.BELOW, R.id.group_text_TextView);
                 imageParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
                 textParams.bottomMargin = textMarginImageSize / 2;
