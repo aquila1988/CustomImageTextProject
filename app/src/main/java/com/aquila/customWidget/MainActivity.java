@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.aquia.sp.viewer.SPFileListActivity;
 import com.aquila.commutil.CLog;
 
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity  implements OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == clickButton){
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent(this, SPFileListActivity.class);
             startActivity(intent);
         }
     }

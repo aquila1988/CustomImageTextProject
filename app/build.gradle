@@ -27,4 +27,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile project(':customwidgetmodule')
     compile project(':commutilmodule')
+    compile 'com.aquila.spviewer:sharedpreferencesviewer:1.0.0'
 }

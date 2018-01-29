@@ -5,9 +5,10 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
+import android.text.InputFilter;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -39,6 +40,12 @@ public class GroupImageTextLayout extends RelativeLayout {
             Gravity.CENTER_VERTICAL
     };
 
+    private static final TextUtils.TruncateAt[] TEXT_ELLIPSE ={
+            TextUtils.TruncateAt.START,
+            TextUtils.TruncateAt.MIDDLE,
+            TextUtils.TruncateAt.END,
+            TextUtils.TruncateAt.MARQUEE,
+    };
 //    private static final int ORIENTATION_VERTICAL = 0;
 
     public static final int IMAGE_LEFT_TEXT_RIGHT = 0;
@@ -46,25 +53,24 @@ public class GroupImageTextLayout extends RelativeLayout {
     public static final int IMAGE_RIGHT_TEXT_LEFT= 2;
     public static final int IMAGE_BOTTOM_TEXT_TOP= 3;
 
-    @IntDef({IMAGE_LEFT_TEXT_RIGHT, IMAGE_TOP_TEXT_BOTTOM, IMAGE_RIGHT_TEXT_LEFT, IMAGE_BOTTOM_TEXT_TOP})
-    public @interface OrientationType{}
+//    @IntDef({IMAGE_LEFT_TEXT_RIGHT, IMAGE_TOP_TEXT_BOTTOM, IMAGE_RIGHT_TEXT_LEFT, IMAGE_BOTTOM_TEXT_TOP})
+//    public @interface OrientationType{}
 
 
     private int imageWidth;
     private int imageHeight;
-    private Drawable imageDrawable;
+//    private Drawable imageDrawable;
     private Drawable imageBackgroundDrawable;
     private Drawable textBackgroundDrawable;
-    private int scaleTypeIndex = -1;
+//    private int scaleTypeIndex = -1;
 
     private int textSize;
     private String textString;
     private ColorStateList textColor;
-    private int gravityIndex = 0;
 
     private int textMarginImageSize;
 
-    private @OrientationType int orientationType = IMAGE_TOP_TEXT_BOTTOM;
+//    private @OrientationType int orientationType = IMAGE_TOP_TEXT_BOTTOM;
 
     private ImageView imageView;
     private TextView textView;
@@ -73,16 +79,15 @@ public class GroupImageTextLayout extends RelativeLayout {
 
     public GroupImageTextLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initUI(context);
         initializeAttrs(context, attrs);
-        initializeView(context);
+        initializeView();
     }
 
     private void initializeAttrs(Context context, AttributeSet attrs) {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GroupImageTextLayout);
         imageWidth = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_image_width, 0);
         imageHeight = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_image_height, 0);
-        imageDrawable = a.getDrawable(R.styleable.GroupImageTextLayout_app_image_src);
-        scaleTypeIndex = a.getInt(R.styleable.GroupImageTextLayout_app_scale_type, -1);
 
         imageBackgroundDrawable = a.getDrawable(R.styleable.GroupImageTextLayout_app_image_background);
         textBackgroundDrawable = a.getDrawable(R.styleable.GroupImageTextLayout_app_text_background);
@@ -90,27 +95,66 @@ public class GroupImageTextLayout extends RelativeLayout {
         textSize = a.getDimensionPixelSize(R.styleable.GroupImageTextLayout_app_text_size, 16);
         textColor = a.getColorStateList(R.styleable.GroupImageTextLayout_app_text_color);
         textString = a.getString(R.styleable.GroupImageTextLayout_app_text);
-        gravityIndex = a.getInt(R.styleable.GroupImageTextLayout_app_text_gravity, 0);
-
-
-
-        orientationType = a.getInt(R.styleable.GroupImageTextLayout_app_parent_orientation, IMAGE_TOP_TEXT_BOTTOM);
         textMarginImageSize = a.getDimensionPixelOffset(R.styleable.GroupImageTextLayout_app_text_margin_image_size, 0);
-        a.recycle();
-    }
 
-    private void initializeView(Context context) {
-        inflate(context, R.layout.group_image_text_layout, this);
-        imageView =   (ImageView) findViewById(R.id.group_image_ImageView);
-        textView = (TextView) findViewById(R.id.group_text_TextView);
 
+        Drawable imageDrawable = a.getDrawable(R.styleable.GroupImageTextLayout_app_image_src);
         if (imageDrawable != null) {
             imageView.setImageDrawable(imageDrawable);
         }
-
+        int scaleTypeIndex = a.getInt(R.styleable.GroupImageTextLayout_app_scale_type, -1);
         if (scaleTypeIndex >= 0) {
             setScaleType(SCALE_TYPE_ARRAY[scaleTypeIndex]);
         }
+
+        int orientationType = a.getInt(R.styleable.GroupImageTextLayout_app_image_relative_text_type, IMAGE_TOP_TEXT_BOTTOM);
+        initTextOrientationStyle(orientationType);
+
+        int gravityIndex = a.getInt(R.styleable.GroupImageTextLayout_app_text_gravity, -1);
+        if (gravityIndex >= 0){
+            textView.setGravity(GRAVITY_ARRAY[gravityIndex]);
+        }
+
+        textView.setSingleLine(a.getBoolean(R.styleable.GroupImageTextLayout_app_text_single_line, false));
+
+        int maxLines =a.getInt(R.styleable.GroupImageTextLayout_app_text_max_lines, -10);
+        if (maxLines >= 0){
+            textView.setMaxLines(maxLines);
+        }
+
+        int ellipsizeIndex = a.getInt(R.styleable.GroupImageTextLayout_app_text_ellipse, -1);
+        if (ellipsizeIndex != -1){
+            textView.setEllipsize(TEXT_ELLIPSE[ellipsizeIndex]);
+        }
+
+        int maxLength = a.getInt(R.styleable.GroupImageTextLayout_app_text_max_length, -1);
+        if (maxLength >= 0) {
+            textView.setFilters(new InputFilter[] { new InputFilter.LengthFilter(maxLength) });
+        } else {
+            textView.setFilters(new InputFilter[0]);
+        }
+
+
+
+        a.recycle();
+
+
+
+
+
+    }
+
+    private void initUI(Context context){
+        inflate(context, R.layout.group_image_text_layout, this);
+        imageView =   (ImageView) findViewById(R.id.group_image_ImageView);
+        textView = (TextView) findViewById(R.id.group_text_TextView);
+    }
+
+    private void initializeView() {
+
+
+
+
 
         if (textColor != null) {
             textView.setTextColor(textColor);
@@ -137,13 +181,12 @@ public class GroupImageTextLayout extends RelativeLayout {
         if (textString != null) {
             textView.setText(textString);
         }
-        textView.setGravity(GRAVITY_ARRAY[gravityIndex]);
 
-        initTextOrientationStyle();
+//        initTextOrientationStyle();
 
     }
 
-    private void initTextOrientationStyle() {
+    private void initTextOrientationStyle(int orientationType) {
         LayoutParams textParams = (LayoutParams) textView.getLayoutParams();
         LayoutParams imageParams = (LayoutParams) imageView.getLayoutParams();
 
@@ -222,12 +265,5 @@ public class GroupImageTextLayout extends RelativeLayout {
         imageView.setScaleType(scaleType);
     }
 
-    /**
-     * 设置图文的布局样式
-     * */
-    public void setTextOrientation(int orientation){
-        this.orientationType = orientation;
-        invalidate();
-    }
 
 }
